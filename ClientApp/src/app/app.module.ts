@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select'; 
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +13,7 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionService } from './services/question.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
-  providers: [],
+  providers: [QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,6 +23,8 @@ namespace Kushyot.Models
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Date { get; set;}
+
+        public int ?Rating {get; set;}
         
         
     }

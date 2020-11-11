@@ -1,1 +1,52 @@
-<p>add-question works!</p>
+<div class="add-new-question">
+<form action="">
+    <div class="form-group">
+        <label for="question" class="required">Question</label>
+        <input type="text" class="form-control" id="question" placeholder="Question here">
+    </div>
+    <div class="form-group">
+        <label for="auther">Auther</label>
+        <input type="text" class="form-control" id="auther" placeholder="who are you?">
+    </div>
+    <div class="form-group">
+        <label for="format"class="required">Format</label>
+        <ng-select
+        [items]="formatsList"
+        [multiple]="true"
+        bindLabel="name"
+        [selectableGroup]="true"
+        [selectableGroupAsModel]="false"
+        [closeOnSelect]="false"
+        [searchable]="true" 
+        bindValue="id"
+        [(ngModel)]="selectedFormat">
+    </ng-select>
+    </div>
+    <div class="form-group">
+        <label for="subject" class="required">Subject</label>
+        <ng-select
+        [items]="subjectList"
+        [multiple]="true"
+        bindLabel="name"
+        [selectableGroup]="true"
+        [selectableGroupAsModel]="false"
+        [closeOnSelect]="false"
+        [searchable]="true" 
+        bindValue="id"
+        [(ngModel)]="selectedSubjects">
+     
+    </ng-select>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="Adult">
+        <label class="form-check-label" for="Adult">
+          Kids friendly?
+        </label>
+      </div>
+
+
+
+
+</form>
+</div>
+

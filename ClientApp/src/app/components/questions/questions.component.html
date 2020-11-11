@@ -1,1 +1,30 @@
-<p>questions works!</p>
+<h1>Questions</h1>
+
+<p *ngIf="!questions"><b>Loading questions...</b></p>
+
+<table class="table table-striped" *ngIf="questions">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Author</th>
+            <th>Subject</th>
+            <th>Format</th>
+            <th>Rating</th>
+            <th>Adult</th>
+            <th>Publish Date</th>
+            <th>Rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let question of questions">
+            <td>{{question.questionData}}</td>
+            <td>{{question.author}}</td>
+            <td>{{question.subject}}</td>
+            <td>{{question.format}}</td>
+            <td>{{question.rating}}</td>
+            <td>{{question.adult}}</td>
+            <td>{{question.date | date : "dd/mm/yyyy"}}</td>
+            <td>Actions</td>
+        </tr>
+    </tbody>
+</table>
