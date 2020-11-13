@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select'; 
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
-
+ 
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +20,7 @@ import { QuestionsComponent } from './components/questions/questions.component';
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionService } from './services/question.service';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { QuestionService } from './services/question.service';
     ReactiveFormsModule,
     NgSelectModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule
   ],
   providers: [QuestionService],
   bootstrap: [AppComponent]

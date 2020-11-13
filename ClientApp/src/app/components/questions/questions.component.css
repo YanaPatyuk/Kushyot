@@ -1,3 +1,15 @@
 table {
     width: 100%;
   }
+
+th {
+  width: 40px;
+}
+
+td {
+  width: 40px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
