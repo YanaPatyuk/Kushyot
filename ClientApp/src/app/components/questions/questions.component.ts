@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 
 
+
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
@@ -21,9 +22,11 @@ export class QuestionsComponent implements OnInit {
   constructor(private service: QuestionService) { }
 
   ngOnInit(): void {
-    this.service.getAllQuestions().subscribe(data => {this.questions = data;})
-    this.dataSource = new MatTableDataSource<Question>(this.questions);
-    this.dataSource.paginator = this.paginator;
+    this.service.getAllQuestions().subscribe(data => {
+      this.questions = data;
+      this.dataSource = new MatTableDataSource<Question>(this.questions);
+      this.dataSource.paginator = this.paginator;
+    })
   }
 
 }

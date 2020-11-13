@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select'; 
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -35,6 +36,7 @@ import { QuestionService } from './services/question.service';
     ReactiveFormsModule,
     NgSelectModule,
     MatTableModule,
+    MatPaginatorModule
   ],
   providers: [QuestionService],
   bootstrap: [AppComponent]
