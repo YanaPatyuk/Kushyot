@@ -1,15 +1,31 @@
 <div class="add-new-question">
-<form action="">
+    <div *ngIf="showError" class="alert alert-danger" role="alert">Question did not added. Please try again!</div>
+    
+<form [formGroup]="addQuestionForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="question" class="required">Question</label>
-        <input type="text" class="form-control" id="question" placeholder="Question here">
+        <label for="questionData" class="required">Question</label>
+        <textarea class="form-control" id="questionData" formControlName="questionData" placeholder="Write your question here!"></textarea>
+    </div>
+    <div *ngIf="addQuestionForm.controls['questionData'].invalid && (addQuestionForm.controls['questionData'].dirty || addQuestionForm.controls['questionData'].touched)" class="alert alert-danger">
+        <div *ngIf="addQuestionForm.controls['questionData'].errors.required">
+            Question required!
+        </div>
     </div>
     <div class="form-group">
-        <label for="auther">Auther</label>
-        <input type="text" class="form-control" id="auther" placeholder="who are you?">
+        <label for="author" class="required">Author</label>
+        <input class="form-control" type="text" id="author" value="Anonymous" formControlName="author" placeholder="who are you?">
     </div>
-    <div class="form-group">
-        <label for="format"class="required">Format</label>
+    <div *ngIf="addQuestionForm.controls['author'].invalid && (addQuestionForm.controls['author'].dirty || addQuestionForm.controls['author'].touched)" class="alert alert-danger">
+        <div *ngIf="addQuestionForm.controls['author'].errors.pattern">
+            English Letters only!
+        </div>
+        <div *ngIf="addQuestionForm.controls['author'].errors.required">
+            We want to know who are you
+        </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="format"class="required" >Format</label>
         <ng-select
         [items]="formatsList"
         [multiple]="true"
@@ -18,12 +34,14 @@
         [selectableGroupAsModel]="false"
         [closeOnSelect]="false"
         [searchable]="true" 
-        bindValue="id"
-        [(ngModel)]="selectedFormat">
+        [(ngModel)]="selectedFormat"
+        name="format"
+        formControlName="format"
+        >
     </ng-select>
     </div>
-    <div class="form-group">
-        <label for="subject" class="required">Subject</label>
+    <div class="form-group col-md-4">
+        <label for="subject" class="required" >Subject</label>
         <ng-select
         [items]="subjectList"
         [multiple]="true"
@@ -32,21 +50,32 @@
         [selectableGroupAsModel]="false"
         [closeOnSelect]="false"
         [searchable]="true" 
-        bindValue="id"
-        [(ngModel)]="selectedSubjects">
+        [(ngModel)]="selectedSubjects"
+        name="subject"
+        formControlName="subject"
+        >
      
     </ng-select>
     </div>
+    </div>
+    <div *ngIf="addQuestionForm.controls['subject'].invalid && (addQuestionForm.controls['subject'].dirty || addQuestionForm.controls['subject'].touched)" class="alert alert-danger">
+        <div *ngIf="addQuestionForm.controls['subject'].errors.required">
+            Subjects required!
+        </div>
+    </div>
+    <div *ngIf="addQuestionForm.controls['format'].invalid && (addQuestionForm.controls['format'].dirty || addQuestionForm.controls['format'].touched)" class="alert alert-danger">
+        <div *ngIf="addQuestionForm.controls['format'].errors.required">
+            Formet required!
+        </div>
+    </div>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="Adult">
+        <input class="form-check-input" type="checkbox" [value]="false" id="Adult" formControlName="adult" >
         <label class="form-check-label" for="Adult">
           Kids friendly?
         </label>
       </div>
 
-
-
-
+      <button class="btn btn-success" type="submit" [disabled]="addQuestionForm.pristine || addQuestionForm.invalid">Add</button>
 </form>
 </div>
 

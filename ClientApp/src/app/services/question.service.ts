@@ -13,4 +13,9 @@ export class QuestionService {
   getAllQuestions() {
     return this.http.get<Question[]>(this._baseURL + "/GetQuestions");
   }
+
+  addQuestion(question: Question){
+    console.log(question);
+    return this.http.post(this._baseURL + "/AddQuestion", question);
+  }
 }

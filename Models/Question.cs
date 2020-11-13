@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
+using Newtonsoft.Json;
 
 namespace Kushyot.Models
 {

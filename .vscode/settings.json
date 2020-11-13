@@ -4,5 +4,8 @@
     "omnisharp.projectLoadTimeout": 600,
     "csharp.semanticHighlighting.enabled": true,
     "terminal.integrated.automationShell.windows": "",
-    "terminal.integrated.shellArgs.windows": ["-ExecutionPolicy", "Bypass"]
+    "terminal.integrated.shellArgs.windows": [
+        "-ExecutionPolicy",
+        "Bypass"
+    ]
 }

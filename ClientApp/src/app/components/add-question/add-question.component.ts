@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { QuestionsTypes } from 'src/app/constant_data/questionsTypes';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-add-question',
@@ -7,70 +11,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddQuestionComponent implements OnInit {
 
-  subjectList = [
-    {id:0, name:'Cartoons'},
-    {id:1, name:'Personal'},
-    {id:2, name:'Tattoos'},
-    {id:3, name:'Self Care'},
-    {id:4, name:'ChildHood'},
-    {id:5, name:'Life Style'},
-    {id:6, name:'Abrode'},
-    {id:7, name:'Sex'},
-    {id:8, name:'Family'},
-    {id:9, name:'Sociael Media'},
-    {id:10, name:'Life'},
-    {id:11, name:'Sport'},
-    {id:12, name:'Annoing'},
-    {id:13, name:'Gaming'},
-    {id:14, name:'Internet'},
-    {id:15, name:'Anime'},
-    {id:16, name:'Dreams'},
-    {id:17, name:'Music'},
-    {id:18, name:'Harry Potter'},
-    {id:19, name:'TV'},
-    {id:20, name:'Love'},
-    {id:21, name:'Army'},
-    {id:22, name:'politics'},
-    {id:23, name:'Nature'},
-    {id:24, name:'Technology'},
-    {id:25, name:'Other'},
-    {id:26, name:'Disney'},
-    {id:27, name:'School'},
-    {id:28, name:'UFO'},
-    {id:29, name:'Habbits'},
-    {id:30, name:'Food'},
-    {id:31, name:'Career'},
-    {id:32, name:'Books'},
-    {id:33, name:'Religion'},
-    {id:34, name:'Hobbies'},
-    {id:35, name:'Medicine'},
-    {id:36, name:'Economy'},
-    {id:37, name:'Movies'},
-    {id:38, name:'Money'},
-    {id:39, name:'Travel'}
-  ];
-    
+  subjectList = []
   selectedSubjects = [];
-  
-  formatsList = [
-  {id:0, name:'At Work'},
-  {id:1, name:'Would you rather'},
-  {id:2, name:'Family Dinner'},
-  {id:3, name:'Deep Questions'},
-  {id:4, name:'Events'},
-  {id:5, name:'Never Have I Ever'},
-  {id:6, name:'Self Introductio'},
-  {id:7, name:'Dating'},
-  {id:8, name:'Friends'}];
-
+  formatsList = []
   selectedFormat = [];
 
+  addQuestionForm: FormGroup;
+  showError : boolean = false;
 
-
-
-  constructor() { }
+  constructor(private service: QuestionService, private fb:FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    this.addQuestionForm = this.fb.group({
+      questionData:[null, Validators.required],
+      author:[null,Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      subject:[null, Validators.required],
+      format:[null, Validators.required],
+      date:[null],
+      adult:[null,Validators.required],
+    })
+    this.subjectList = QuestionsTypes.getSubjectList();
+    this.formatsList = QuestionsTypes.getFotmatList();
+  }
+
+  onSubmit(){
+    let selecterFinalFormat = [];
+    let selecterFinalSubjects = [];
+    for (var value of this.selectedFormat) {
+      selecterFinalFormat.push(value.name);
+    }
+    for (var value of this.selectedSubjects) {
+      selecterFinalSubjects.push(value.name);
+    }
+    //set the date and update the formats and selected subjects
+    this.addQuestionForm.patchValue({date: new Date()});
+    this.addQuestionForm.patchValue({format: selecterFinalFormat});
+    this.addQuestionForm.patchValue({subject: selecterFinalSubjects});
+    //check what data i send
+    //console.log("Yana");
+    //console.log(this.addQuestionForm);
+    this.service.addQuestion(this.addQuestionForm.value).subscribe(data => {
+      this.router.navigate(["/questions"]);
+    }, error=> {this.showError = true;})
   }
 
 }

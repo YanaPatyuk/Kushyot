@@ -27,13 +27,16 @@ namespace Kushyot.Services
         }
         public Question Get(string id) =>
             _questions.Find<Question>(question => question.Id == id).FirstOrDefault();
-
+        
         public Question Create(Question question)
         {
+            Console.WriteLine("QuestionService:Create new question");
+            Console.WriteLine("QuestionService:" + question);
+            Console.WriteLine("QuestionService:" + question.ToString());
+            Console.WriteLine("QuestionService:" + question.Author);
             _questions.InsertOne(question);
             return question;
         }
-
         public void Update(string id, Question questionIn) =>
             _questions.ReplaceOne(question => question.Id == id, questionIn);
 

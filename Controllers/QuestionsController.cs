@@ -22,9 +22,19 @@ namespace Kushyot.Controllers
 
         [HttpPost("AddQuestion")]
         public IActionResult AddQuestion([FromBody]Question question) {
-            _questionService.Create(question);
-            return Ok("Added");
-            //return CreatedAtRoute("GetQuestion", new { id = question.Id.ToString() }, question);
+            //try add question
+            try
+            {
+                //if not null--add and return OK
+                if(question != null){
+                    _questionService.Create(question);
+                    return Ok(question);
+                }
+                return BadRequest("Question did not added");
+                //if somethong went wrong return error
+            } catch(Exception ex){
+                return BadRequest(ex.Message);
+            }
         }
         //get all questions
         [HttpGet("[action]")]

@@ -2,6 +2,72 @@
 
 <p *ngIf="!questions"><b>Loading questions...</b></p>
 
+
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- questionData Column -->
+    <ng-container matColumnDef="Question">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.questionData}} </td>
+    </ng-container>
+  
+    <!-- author Column -->
+    <ng-container matColumnDef="Author">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+    </ng-container>
+  
+    <!-- subject Column -->
+    <ng-container matColumnDef="Subject">
+      <th mat-header-cell *matHeaderCellDef> Subject </th>
+      <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+    </ng-container>
+  
+    <!-- format Column -->
+    <ng-container matColumnDef="Format">
+      <th mat-header-cell *matHeaderCellDef> Format </th>
+      <td mat-cell *matCellDef="let element"> {{element.format}} </td>
+    </ng-container>
+
+      
+    <!-- rating Column -->
+    <ng-container matColumnDef="Rating">
+        <th mat-header-cell *matHeaderCellDef> Rating </th>
+        <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+    </ng-container>
+
+        
+    <!-- adult Column -->
+    <ng-container matColumnDef="Adult">
+        <th mat-header-cell *matHeaderCellDef> Adult </th>
+        <td mat-cell *matCellDef="let element"> {{element.adult}} </td>
+    </ng-container>
+
+    <!-- date Column -->
+    <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date | date : "dd/MM/yyyy"}} </td>
+    </ng-container>
+
+    <!-- date Column -->
+    <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element"> Action </td>
+    </ng-container>
+    
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>
+  <!--
+
 <table class="table table-striped" *ngIf="questions">
     <thead>
         <tr>
@@ -19,12 +85,16 @@
         <tr *ngFor="let question of questions">
             <td>{{question.questionData}}</td>
             <td>{{question.author}}</td>
-            <td>{{question.subject}}</td>
-            <td>{{question.format}}</td>
+            <td>
+                <span *ngFor="let sub of question.subject" class="font-weight-light badge badge-pill badge-info">{{sub}}</span>
+            </td>
+            <td>
+                <span *ngFor="let for of question.format" class=" font-weight-lighter badge badge-pill badge-dark">{{for}}</span>
+            </td>
             <td>{{question.rating}}</td>
             <td>{{question.adult}}</td>
-            <td>{{question.date | date : "dd/mm/yyyy"}}</td>
+            <td>{{question.date | date : "dd/MM/yyyy"}}</td>
             <td>Actions</td>
         </tr>
     </tbody>
-</table>
+</table>-->
