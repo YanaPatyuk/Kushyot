@@ -47,6 +47,7 @@ export class AddQuestionComponent implements OnInit {
     this.addQuestionForm.patchValue({date: new Date()});
     this.addQuestionForm.patchValue({format: selecterFinalFormat});
     this.addQuestionForm.patchValue({subject: selecterFinalSubjects});
+    this.addQuestionForm.patchValue({rating: 0});
     //check what data i send
     //console.log("Yana");
     //console.log(this.addQuestionForm);

@@ -36,13 +36,46 @@ namespace Kushyot.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("GetFilterdQuestions")]
+        public IActionResult GetFilterdQuestions([FromBody] FilterData info) {
+             try
+            {
+                //if not null--add and return OK
+                if(info != null){
+                   var filterdQuestion =  _questionService.GetFilterQurstions(info);
+                    return Ok(filterdQuestion);
+                }
+                return BadRequest("Question did not filterd");
+                //if somethong went wrong return error
+            } catch(Exception ex){
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("UpdateQuestion")]
+        public IActionResult UpdateQuestion( [FromBody]Question question) {
+            //try add question
+            Console.WriteLine("Questioncontroller:update question:"+ question.Id);
+            try
+            {
+                //if not null--add and return OK
+                if(question != null){
+                    _questionService.Update(question.Id, question);
+                    return Ok(question);
+                }
+                return BadRequest("Question did not updated");
+                //if somethong went wrong return error
+            } catch(Exception ex){
+                return BadRequest(ex.Message);
+            }
+        }
         //get all questions
         [HttpGet("[action]")]
         public IActionResult GetQuestions() {
             var allQuestions = _questionService.GetAllQuestions();
             return Ok(allQuestions);
         }
-
+        
         //delete a question
 
         [HttpDelete("{id:length(24)}")]

@@ -64,7 +64,11 @@
     <!-- date Column -->
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element"> Action </td>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" aria-label="heart icon" (click)="buttonLike(element); btn.disabled = true;" #btn>
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </td>
     </ng-container>
     
 

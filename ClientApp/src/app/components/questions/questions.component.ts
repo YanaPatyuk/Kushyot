@@ -4,6 +4,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -40,6 +41,12 @@ ngAfterViewInit() {
   this.dataSource.sort = this.sort;
 }
 
+buttonLike(question: Question) {
+  if(question.rating == null) question.rating = 1;
+  else
+    question.rating +=1;
+  this.service.updateQuestion(question).subscribe(data=> {});
+}
   ngOnInit(): void {
     this.service.getAllQuestions().subscribe(data => {
       this.questions = data;
@@ -54,4 +61,7 @@ ngAfterViewInit() {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  actionMethod(event: any) {
+    event.target.disabled = true;
+}
 }

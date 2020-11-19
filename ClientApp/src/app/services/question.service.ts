@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FilterData } from '../interfaces/filterData';
 import { Question } from '../interfaces/question';
 
 @Injectable({
@@ -15,7 +16,14 @@ export class QuestionService {
   }
 
   addQuestion(question: Question){
-    console.log(question);
-    return this.http.post(this._baseURL + "/AddQuestion", question);
+    return this.http.post(this._baseURL + "/AddQuestion",  question);
+  }
+
+  updateQuestion(question: Question){
+    return this.http.post(this._baseURL + "/UpdateQuestion", question);
+  }
+
+  filterData(filterdData: FilterData){
+    return this.http.post(this._baseURL + "/GetFilterdQuestions", filterdData);
   }
 }

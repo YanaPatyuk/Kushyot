@@ -7,6 +7,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
+
 
 
  
@@ -21,6 +25,7 @@ import { AddQuestionComponent } from './components/add-question/add-question.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionService } from './services/question.service';
 import { MatSortModule } from '@angular/material/sort';
+import { FilterGameComponent } from './components/filter-game/filter-game.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { MatSortModule } from '@angular/material/sort';
     HomeComponent,
     NavMenuComponent,
     QuestionsComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    FilterGameComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -42,7 +48,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [QuestionService],
   bootstrap: [AppComponent]
