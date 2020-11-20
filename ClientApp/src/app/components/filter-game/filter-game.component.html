@@ -1,1 +1,68 @@
 <p>filter-game works!</p>
+<div class="filter-menu">
+    <form [formGroup]="addFilterForm" (ngSubmit)="getFilterd()">
+        <div class="form-row">
+            <div class="form-check">
+                <input class="form-check-input  col-md-1" type="checkbox" [value]="true" id="Adult"
+                    formControlName="adult">
+                <label class="form-check-label" for="Adult">
+                    Kids friendly?
+                </label>
+            </div>
+            <div class="form-group col-sm-4">
+                <ng-select for="format" class="required" [items]="formatsList" [multiple]="true" bindLabel="name" [selectableGroup]="true"
+                    [selectableGroupAsModel]="false" [closeOnSelect]="false" [searchable]="true"
+                    [(ngModel)]="selectedFormat" name="format" formControlName="format">
+                    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                            <span class="ng-value-label" width="20px" height="20px"> {{item.name}}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                            <span class="ng-value-label">{{items.length - 1}} more...</span>
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+            <div class="form-group col-sm-4">
+                <ng-select for="subject" class="required" [items]="subjectList" [multiple]="true" bindLabel="name" [selectableGroup]="true"
+                    [selectableGroupAsModel]="false" [closeOnSelect]="false" [searchable]="true"
+                    [(ngModel)]="selectedSubjects" name="subject" formControlName="subject">
+                    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                            <span class="ng-value-label" width="20px" height="20px"> {{item.name}}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                            <span class="ng-value-label">{{items.length - 1}} more...</span>
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+            <input type="image" src="assets/searching-magnifying-glass.png" alt="Submit" width="48" height="48"  [disabled]="addFilterForm.pristine || addFilterForm.invalid" >
+        </div>
+        <div *ngIf="addFilterForm.controls['subject'].invalid && (addFilterForm.controls['subject'].dirty || addFilterForm.controls['subject'].touched)"
+            class="text">
+            <div *ngIf="addFilterForm.controls['subject'].errors.required">
+                Subjects required!
+            </div>
+        </div>
+        <div *ngIf="addFilterForm.controls['format'].invalid && (addFilterForm.controls['format'].dirty || addFilterForm.controls['format'].touched)"
+            class="text">
+            <div *ngIf="addFilterForm.controls['format'].errors.required">
+                Formet required!
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+
+<div *ngIf="!submited" class="game-menu">
+    Hi
+</div>
+
+<div *ngIf="submited">
+    Bye
+</div>
