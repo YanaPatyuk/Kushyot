@@ -48,6 +48,7 @@ namespace Kushyot.Controllers
                 return BadRequest("Question did not filterd");
                 //if somethong went wrong return error
             } catch(Exception ex){
+                Console.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
             }
         }

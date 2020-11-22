@@ -24,6 +24,8 @@ export class QuestionService {
   }
 
   filterData(filterdData: FilterData){
-    return this.http.post(this._baseURL + "/GetFilterdQuestions", filterdData);
+    var s =  this.http.post<Question[]>(this._baseURL + "/GetFilterdQuestions", filterdData);
+    console.log(s);
+    return s;
   }
 }

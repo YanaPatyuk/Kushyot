@@ -3,7 +3,7 @@
     <form [formGroup]="addFilterForm" (ngSubmit)="getFilterd()">
         <div class="form-row">
             <div class="form-check">
-                <input class="form-check-input  col-md-1" type="checkbox" [value]="true" id="Adult"
+                <input class="form-check-input  col-md-1" type="checkbox"  id="Adult"
                     formControlName="adult">
                 <label class="form-check-label" for="Adult">
                     Kids friendly?
@@ -59,10 +59,15 @@
 
 </div>
 
-<div *ngIf="!submited" class="game-menu">
+<div *ngIf="!submited">
     Hi
 </div>
-
-<div *ngIf="submited">
+<div *ngIf="showError">no data</div>
+<div *ngIf="submited" class="game-start">
     Bye
+    <input type="image" src="assets/Button-Next-icon.png" width="48" height="48"  (click)="this.nextBtn();" >
+    <p><span>{{current_question.questionData}}</span></p>
+    <input type="image" src="assets/Button-Previous-icon.png" width="48" height="48"  (click)="this.backBtn();" >
+
+
 </div>

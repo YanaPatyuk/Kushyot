@@ -18,11 +18,13 @@ export class FilterGameComponent implements OnInit {
   selectedFormat = [];
   subjectList = [];
   formatsList = [];
-  list_of_questions = [];
+  public list_of_questions: Question[];
   adult = false;
   clear_bord = true;
   addFilterForm: FormGroup;
   submited: boolean = false;
+  showError:boolean;
+  current_question_id: number;
   constructor(private service: QuestionService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class FilterGameComponent implements OnInit {
       format:[null, Validators.required],
       adult:[null],
     })
+    this.showError= false;
   }
 
   getFilterd(){
@@ -45,7 +48,34 @@ export class FilterGameComponent implements OnInit {
     for (var value of this.selectedSubjects) {
       selecterFinalSubjects.push(value.name);
     }
-    this.submited = true;
+    this.addFilterForm.patchValue({format: selecterFinalFormat});
+    this.addFilterForm.patchValue({subject: selecterFinalSubjects});
+    console.log(this.addFilterForm.value);
+    this.service.filterData(this.addFilterForm.value).subscribe(data => {
+      console.log(data);
+      this.list_of_questions = data;
+      if(this.list_of_questions.length < 1) this.showError = true;
+      this.submited = true;
+      this.current_question = this.list_of_questions[0];
+      this.current_question_id = 0;
+      this.showError= false;
+      this.addFilterForm.reset();
+    })
+  }
+
+  nextBtn() {
+    console.log(this.current_question_id);
+
+    if(this.current_question_id >= this.list_of_questions.length - 1) return;
+    this.current_question_id +=1;
+    this.current_question = this.list_of_questions[this.current_question_id];
+    console.log(this.current_question_id);
+    console.log(this.current_question);
+  }
+  backBtn() {
+    if(this.current_question_id <=0 ) return ;
+    this.current_question_id -=1;
+    this.current_question = this.list_of_questions[this.current_question_id];
   }
 
 }
