@@ -1,0 +1,10 @@
+{
+    "title": "Kushyot",
+    "menu":{
+        "home": "Home",
+        "add question": "Add Question",
+        "search": "Search",
+        "play": "Play",
+        "about me": "About me"
+    }
+}

@@ -1,20 +1,79 @@
-table {
+mat-table {
     width: 100%;
   }
 
-th {
-  width: 40px;
-}
 
-td {
-  width: 40px;
-}
-
-th.mat-sort-header-sorted {
+mat-header-row.mat-sort-header-sorted {
   color: black;
 }
 
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
+}
+
+
+
+mat-cell > span.ellipsis {
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
+}
+
+
+mat-row.example-detail-row {
+  height: 0;
+}
+
+mat-row.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+mat-row.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+.example-element-row mat-cell {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.example-viewport {
+  height: 100px;
+  width: 200px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.example-item {
+  height: 50px;
 }

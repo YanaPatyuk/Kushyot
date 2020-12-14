@@ -1,10 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import { Question } from 'src/app/interfaces/question';
 import { QuestionService } from 'src/app/services/question.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY} from '@angular/cdk/scrolling';
+
+
 
 
 
@@ -12,12 +18,20 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.css']
+  styleUrls: ['./questions.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class QuestionsComponent implements OnInit {
   displayedColumns: string[] = ['questionData', 'author', 'format', 'subject', 'adult', 'date', 'rating', 'action'];
   public questions : Question[];
   paginator: MatPaginator;
+  expandedElement: Question | null;
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();

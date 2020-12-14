@@ -1,0 +1,10 @@
+{
+    "title": "קושיות",
+    "menu":{
+        "home": "בית",
+        "add question": "הוסף שאלה",
+        "search": "חיפוש",
+        "play": "שחק",
+        "about me": "עלי"
+    }
+}
