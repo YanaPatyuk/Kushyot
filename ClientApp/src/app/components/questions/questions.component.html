@@ -6,8 +6,8 @@
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event)" placeholder="Search what you need..." #input>
 </mat-form-field>
-<div class="mat-elevation-z8" *ngIf='questions'>
-  <mat-table multiTemplateDataRows [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<div *ngIf="questions">
+  <mat-table multiTemplateDataRows mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -49,7 +49,7 @@
     <!-- rating Column -->
     <ng-container matColumnDef="rating">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Rating </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
+      <mat-cell *matCellDef="let element" class="actionCol"> {{element.rating}} loved! </mat-cell>
     </ng-container>
 
 
@@ -68,7 +68,7 @@
     <!-- date Column -->
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element" class="actionCol">
         <button mat-icon-button color="warn" aria-label="heart icon" (click)="buttonLike(element); btn.disabled = true;"
           #btn>
           <mat-icon>favorite</mat-icon>

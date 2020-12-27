@@ -6,9 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY} from '@angular/cdk/scrolling';
+
+
 
 
 
@@ -28,7 +27,7 @@ import {FixedSizeVirtualScrollStrategy, VIRTUAL_SCROLL_STRATEGY} from '@angular/
   ]
 })
 export class QuestionsComponent implements OnInit {
-  displayedColumns: string[] = ['questionData', 'author', 'format', 'subject', 'adult', 'date', 'rating', 'action'];
+  displayedColumns: string[] = ['questionData', 'author', 'date', 'rating', 'action'];
   public questions : Question[];
   paginator: MatPaginator;
   expandedElement: Question | null;
@@ -51,8 +50,8 @@ export class QuestionsComponent implements OnInit {
 
 @ViewChild(MatSort) sort: MatSort;
 
-ngAfterViewInit() {
-  this.dataSource.sort = this.sort;
+@ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
+  this.dataSource.sort = sort;
 }
 
 buttonLike(question: Question) {
